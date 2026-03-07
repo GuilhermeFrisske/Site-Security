@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="bg-glow" id="glow"></div>
+
+    <header class="navbar">
+        <div class="logo"></div>
+        <nav>
+    <a href="login.html" class="nav-login">Login</a>
+    <a href="register.html" class="btn-signup-nav">Register</a>
+    <a href="" id="other-trigger">Other</a>
+        </nav>
+        
+</div>
+    </header>
+
+
+    <main>
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content reveal">
+                    <h1>O Futuro do <br><span id="typewriter"></span></h1>
+                    <p>
+                        Tecnologia de rastreamento com precisão submétrica. Segurança de nível militar para o que é essencial para você.
+                    </p>
+                </div>
+
+                <div class="hero-visual reveal" style="transition-delay: 0.3s;">
+                    <div class="phone-wrapper">
+                        <div class="phone-case" id="phone">
+                            <div class="phone-screen">
+                                <div class="phone-ui">
+                                    <div class="ui-header"></div>
+                                    <div class="ui-chart">
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                        <div class="line"></div>
+                                    </div>
+                                </div>
+
+                                <div class="location-pulse">
+                                    <div class="pin"></div>
+                                    <div class="ring"></div>
+                                    <div class="ring"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="data-protection-container reveal">
+            <div class="set-information">
+                <h1>Informação de Proteção de Dados</h1>
+                <p class="subtitle">Sua privacidade é nossa prioridade. Entenda como cuidamos dos seus dados.</p>
+            </div>
+        
+            <div class="content-grid">
+                <article>
+                    <h3>Proteção de informações</h3>
+                    <p>Coletamos apenas o necessário para garantir a melhor experiência...</p>
+                    <button class="btn-primary">Ver Detalhes</button>
+                </article>
+                
+                <article>
+                    <h3>Seus Direitos</h3>
+                    <p>Você tem o direito de solicitar a exclusão dos seus dados conforme a LGPD.</p>
+                    <button class="btn-primary">Acessar Portal</button>
+                </article>
+            </div>
+        </section>
+            
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Guardian Security Lab. Crafted for High Security.</p>
+    </footer>
+
+    <script>
+        const glow = document.getElementById('glow');
+        const phone = document.getElementById('phone');
+
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const x = (clientX / window.innerWidth) * 100;
+            const y = (clientY / window.innerHeight) * 100;
+            
+            glow.style.background = `radial-gradient(circle at ${x}% ${y}%, var(--primary-glow) 0%, transparent 70%)`;
+
+            if(phone) {
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                const rotateX = (clientY - centerY) / 30;
+                const rotateY = (clientX - centerX) / -30;
+
+                phone.style.transform = `rotateX(${rotateX}deg) rotateY(${-25 + rotateY}deg)`;
+            }
+        });
+
+
+        const words = ["Rastreamento.", "Desenvolvimento.", "Monitoramento.", "Controle."];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
+
+        function type() {
+            const current = words[wordIdx];
+            const typewriterEl = document.getElementById('typewriter');
+            
+            if (isDeleting) {
+                typewriterEl.textContent = current.substring(0, charIdx--);
+            } else {
+                typewriterEl.textContent = current.substring(0, charIdx++);
+            }
+
+            let typeSpeed = isDeleting ? 70 : 150;
+
+            if (!isDeleting && charIdx === current.length + 1) {
+                isDeleting = true;
+                typeSpeed = 2000;
+            } else if (isDeleting && charIdx === 0) {
+                isDeleting = false;
+                wordIdx = (wordIdx + 1) % words.length;
+                typeSpeed = 500;
+            }
+            setTimeout(type, typeSpeed);
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        window.onload = () => {
+            type();
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        };
+
+        const otherTrigger = document.getElementById('other-trigger');
+        const sidePanel = document.getElementById('side-panel');
+        const closePanel = document.getElementById('close-panel');
+
+        otherTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            sidePanel.classList.add('active');
+        });
+
+        closePanel.addEventListener('click', () => {
+            sidePanel.classList.remove('active');
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (!sidePanel.contains(e.target) && !otherTrigger.contains(e.target)) {
+                sidePanel.classList.remove('active');
+            }
+        });
+        
+    </script>
+</body>
+</html>
