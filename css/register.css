@@ -299,3 +299,5 @@ input:focus ~ .input-line {
     transform: scale(0.95) translateX(-5px);
     transition: 0.1s;
 }
+
+footer { padding: 40px; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; margin-top: 50px; }

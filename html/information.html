@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Tech - Transparência</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/information.css">
+    
+    <style>
+        /* Apenas o CSS necessário para o Toast (notificação) funcionar */
+        #toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            animation: slideIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+    <div id="toast-container"></div>
+
+    <header class="navbar">
+        <nav>
+            <a href="/html/index.html">Home</a>
+        </nav>
+    </header>
+
+    <main class="info-portal reveal">
+        <div class="portal-header">
+            <span class="badge">SISTEMA SEGURO</span>
+            <h1>Transparência de Dados</h1>
+            <p>Sua privacidade é nossa prioridade. Gerencie seus direitos e entenda como tratamos suas informações.</p>
+        </div>
+
+        <div class="info-grid">
+            <article class="info-card">
+                <h3>Seus Direitos</h3>
+                <p>Solicite a exclusão, portabilidade ou correção dos seus dados a qualquer momento de forma simplificada.</p>
+                <a href="portal.html" class="btn-primary">Acessar Portal</a>
+            </article>
+
+            <article class="info-card">
+                <h3>Criptografia</h3>
+                <p>Utilizamos protocolos AES-256 para garantir que nenhum dado sensível seja exposto a terceiros.</p>
+                <button onclick="gerarChaveCripto()" class="btn-primary">Gerar Chave</button>
+            </article>
+
+            <article class="info-card">
+                <h3>Termos de Uso</h3>
+                <p>Nossos termos são escritos de forma clara para que você saiba exatamente o que está aceitando.</p>
+                <button onclick="baixarTermos()" class="btn-primary">Baixar Termos</button>
+            </article>
+
+            <article class="info-card">
+                <h3>Contrato de Serviço</h3>
+                <p>Confira o contrato de prestação de serviços e nossas responsabilidades com sua segurança.</p>
+                <button onclick="baixarContrato()" class="btn-primary">Ler Contrato</button>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Security Node. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script>
+        function showToast(message) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            container.appendChild(toast);
+            
+            setTimeout(() => { 
+                toast.style.opacity = '0'; 
+                toast.style.transform = 'translateX(20px)';
+                setTimeout(() => toast.remove(), 500); 
+            }, 3000);
+        }
+
+        function gerarChaveCripto() {
+            const randomKey = Array.from(window.crypto.getRandomValues(new Uint8Array(16)), b => b.toString(16).padStart(2, '0')).join('');
+            alert("SUA CHAVE DE ACESSO GERADA:\n" + randomKey.toUpperCase());
+            showToast("Chave AES-256 gerada!");
+        }
+
+        function baixarTermos() {
+            const termos = "TERMOS DE USO -1. Dados criptografados.\n2. LGPD Compliance.";
+            downloadFile(termos, "termos-techdata.txt");
+            showToast("Termos baixados!");
+        }
+
+        function baixarContrato() {
+            const contrato = "CONTRATO DE SERVIÇOS DIGITAIS\n\nCompromisso de segurança.";
+            downloadFile(contrato, "contrato-servico.txt");
+            showToast("Contrato baixado!");
+        }
+
+        function downloadFile(content, fileName) {
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
