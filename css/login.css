@@ -1,0 +1,301 @@
+:root {
+    --primary: #6366f1;
+    --primary-glow: #818cf8;
+    --bg: #020617;
+    --glass: rgba(15, 23, 42, 0.8);
+    --border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    background: var(--bg);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+.bg-glow {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+}
+
+#data-bg {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: -1;
+    opacity: 0.2;
+}
+
+.auth-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.auth-card {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 60px 45px;
+    text-align: center;
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Ícone de Escudo Decorativo */
+.security-badge {
+    width: 60px;
+    height: 60px;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 18px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.1);
+}
+
+.shield-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--primary);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+h2 span { color: var(--primary); }
+
+p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+}
+
+/* Inputs Modernos */
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    padding: 12px 5px;
+    color: white;
+    font-size: 1rem;
+    transition: 0.4s;
+    outline: none;
+}
+
+.input-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: 0.4s ease;
+}
+
+input:focus ~ .input-line {
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+/* Botão com Gradiente e Hover Dinâmico */
+.btn-main {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 30px -10px rgba(99, 102, 241, 0.6);
+    margin-top: 20px;
+}
+
+.btn-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.8);
+    filter: brightness(1.1);
+}
+
+.toggle-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.toggle-link:hover {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+.auth-card {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    padding: 60px 45px;
+    text-align: center;
+    
+    /* Sombras e Iluminação */
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    
+    animation: float 6s ease-in-out infinite, pulse-glow 4s infinite;
+    position: relative;
+    transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Efeito de flutuação*/
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Efeito de brilho pulsante na borda */
+@keyframes pulse-glow {
+    0%, 100% { 
+        border-color: rgba(99, 102, 241, 0.2);
+        box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+    }
+    50% { 
+        border-color: rgba(99, 102, 241, 0.6);
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.2), 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+    }
+}
+/* Container do Ícone */
+.security-badge {
+    width: 65px;
+    height: 65px;
+    background: rgba(99, 102, 241, 0.15); /* Fundo roxo sutil */
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    border-radius: 20px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    /* Animação de flutuação independente */
+    animation: badge-float 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+/* Efeito de radar*/
+.security-badge::after {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border: 2px solid var(--primary);
+    border-radius: 22px;
+    opacity: 0;
+    animation: badge-radar 2s linear infinite;
+}
+
+/* O Ícone de Escudo */
+.shield-icon {
+    width: 26px;
+    height: 26px;
+    background: var(--primary);
+    /* Formato de escudo via Clip-path */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    filter: drop-shadow(0 0 10px var(--primary));
+    animation: shield-glow 2s ease-in-out infinite;
+}
+
+/*ANIMAÇÕES*/
+
+
+@keyframes badge-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* 2. Onda de radar se expandindo */
+@keyframes badge-radar {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+
+@keyframes shield-glow {
+    0%, 100% { filter: drop-shadow(0 0 5px var(--primary)); transform: scale(1); }
+    50% { filter: drop-shadow(0 0 15px var(--primary-glow)); transform: scale(1.1); }
+}
+.btn-back {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    z-index: 1000; /* Garante que fique acima de tudo */
+
+    /* O restante do seu código permanece igual */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estilização da Flecha */
+.btn-back .arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+/* Interação: Mouse por cima (Hover) */
+.btn-back:hover {
+    background: rgba(99, 102, 241, 0.1); /* Fundo azul bem leve */
+    color: #6366f1; /* Cor primária do Guardian */
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+    transform: translateX(-5px); /* Efeito de "empurrão" para a esquerda */
+}
+
+/* Animação específica da flecha no hover */
+.btn-back:hover .arrow {
+    transform: translateX(-3px);
+}
+
+/* Interação: Clique */
+.btn-back:active {
+    transform: scale(0.95) translateX(-5px);
+    transition: 0.1s;
+}
